@@ -1,6 +1,5 @@
-name: Generate CSV
+name: Manual Run Commands
 
-# Allow the workflow to be triggered manually
 on:
   workflow_dispatch:
 
@@ -9,15 +8,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Check out the repository code
+      # Check out the repository
       - name: Check out repository
         uses: actions/checkout@v4
 
-      # Navigate to the directory and run the command
-      - name: Run tests in packages/yoastseo
-        working-directory: packages/yoastseo
+      # Install build tools for native modules
+      - name: Set up dependencies for building native modules
         run: |
-          echo "Installing dependencies..."
-          yarn install
-          echo "Running tests..."
-          yarn test inclusiveLanguage
+          sudo apt-get update
+          sudo apt-get install -y build-essential python3
+
+      # Set up authentication for private GitHub repositories
+      - name: Configure Git authentication
+        run: |
+          echo "machine github.com login ${{ secrets.GH_PAT }}" > ~/.netrc
+          chmod 600 ~/.netrc
+
+      # Install dependencies
+      - name: Install dependencies
+        working-directory: packages/yoastseo
+        run: yarn install
+
+      # Run tests
+      - name: Run tests
+        working-directory: packages/yoastseo
+        run: yarn test inclusiveLanguage
