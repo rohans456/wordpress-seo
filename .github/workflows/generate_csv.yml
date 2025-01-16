@@ -1,0 +1,21 @@
+name: Generate CSV
+
+# Allow the workflow to be triggered manually
+on:
+  workflow_dispatch:
+
+jobs:
+  run-commands:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Check out the repository code
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      # Navigate to the directory and run the command
+      - name: Run tests in packages/yoastseo
+        working-directory: packages/yoastseo
+        run: |
+          echo "Running tests in packages/yoastseo..."
+          yarn test inclusiveLanguage
