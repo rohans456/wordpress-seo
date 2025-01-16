@@ -17,5 +17,7 @@ jobs:
       - name: Run tests in packages/yoastseo
         working-directory: packages/yoastseo
         run: |
-          echo "Running tests in packages/yoastseo..."
+          echo "Installing dependencies..."
+          yarn install
+          echo "Running tests..."
           yarn test inclusiveLanguage
