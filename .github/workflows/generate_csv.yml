@@ -1,4 +1,4 @@
-name: Generate CSV
+name: Manual Run Commands
 
 on:
   workflow_dispatch:
@@ -12,22 +12,16 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      # Install build tools for native modules
+      # Set up dependencies for building native modules
       - name: Set up dependencies for building native modules
         run: |
           sudo apt-get update
           sudo apt-get install -y build-essential python3
 
-      # Set up authentication for private GitHub repositories
-      - name: Configure Git authentication
-        run: |
-          echo "machine github.com login ${{ secrets.GH_PAT }}" > ~/.netrc
-          chmod 600 ~/.netrc
-
       # Install dependencies
       - name: Install dependencies
         working-directory: packages/yoastseo
-        run: yarn install
+        run: yarn install --ignore-scripts
 
       # Run tests
       - name: Run tests
