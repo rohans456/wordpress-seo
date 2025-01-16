@@ -1,4 +1,4 @@
-name: Manual Run Commands
+name: Generate CSV
 
 on:
   workflow_dispatch:
