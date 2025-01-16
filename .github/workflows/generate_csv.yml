@@ -17,16 +17,16 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y build-essential python3
 
+      # Install dependencies
+      - name: Install dependencies
+        working-directory: packages/yoastseo
+        run: yarn install --ignore-scripts
+
       # Configure Git authentication
       - name: Set up Git authentication
         run: |
           echo "machine github.com login ${{ secrets.GH_PAT }}" > ~/.netrc
           chmod 600 ~/.netrc
-          
-      # Install dependencies
-      - name: Install dependencies
-        working-directory: packages/yoastseo
-        run: yarn install --ignore-scripts
 
       # Run tests
       - name: Run tests
