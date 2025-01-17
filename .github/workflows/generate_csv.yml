@@ -21,19 +21,8 @@ jobs:
       - name: Install dependencies
         working-directory: packages/yoastseo
         run: yarn install --ignore-scripts
-
-      # Configure Git authentication
-      - name: Set up Git authentication
-        run: |
-          echo "machine github.com login ${{ secrets.GH_PAT }}" > ~/.netrc
-          chmod 600 ~/.netrc
-
-      # Verify Git remote
-      - name: Verify Git remotes
-        run: git remote -v
-        working-directory: packages/yoastseo
         
       # Run tests
       - name: Run tests
         working-directory: packages/yoastseo
-        run: yarn test inclusiveLanguage
+        run: yarn export:inclusive-language
