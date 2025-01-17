@@ -39,7 +39,7 @@ describe( "Export of the inclusive language configuration", () => {
 		// Writes the data to this temporary directory
 		try {
 			fs.writeFileSync(dir + filename, content);
-			console.log('File written successfully!');
+			console.log('File written successfully! at ' + dir + filename);
 		  } catch (error) {
 			console.error('Error writing file:', error.message);
 			return error.message; // Return the exact error message
