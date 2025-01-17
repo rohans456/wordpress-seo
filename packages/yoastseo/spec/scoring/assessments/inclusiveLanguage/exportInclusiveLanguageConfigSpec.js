@@ -31,10 +31,17 @@ describe( "Export of the inclusive language configuration", () => {
 	const writeToTempFile = ( filename, content ) => {
 		// Creates a temporary directory in the current working directory to store the data, if it not yet exists.
 		// (i.e., packages/yoastseo/tmp/ if this function is called from packages/yoastseo/)
-		const dir = "tmp/";
-		if ( ! fs.existsSync( dir ) ) {
-			fs.mkdirSync( dir );
-		}
+		try {
+			const dir = "tmp/";
+			if (!fs.existsSync(dir)) {
+			  fs.mkdirSync(dir);
+			  console.log(`Directory '${dir}' created successfully.`);
+			} else {
+			  console.log(`Directory '${dir}' already exists.`);
+			}
+		  } catch (error) {
+			console.error(`Error handling directory '${dir}':`, error.message);
+		  }
 
 		// Writes the data to this temporary directory
 		try {
