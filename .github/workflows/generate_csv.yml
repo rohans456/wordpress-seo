@@ -20,7 +20,10 @@ jobs:
       - name: Check directory permissions
         run: ls -ld packages/yoastseo 
 
-      # Run tests
+      # Run tests with debug logs
       - name: Run tests
         working-directory: packages/yoastseo
         run: yarn export:inclusive-language
+        env:
+          ACTIONS_RUNNER_DEBUG: true
+          ACTIONS_STEP_DEBUG: true
