@@ -22,6 +22,10 @@ jobs:
         working-directory: packages/yoastseo
         run: yarn install --ignore-scripts
         
+       # Check directory permissions
+      - name: Check directory permissions
+        run: ls -ld packages/yoastseo 
+
       # Run tests
       - name: Run tests
         working-directory: packages/yoastseo
