@@ -37,7 +37,13 @@ describe( "Export of the inclusive language configuration", () => {
 		}
 
 		// Writes the data to this temporary directory
-		fs.writeFileSync( dir + filename, content );
+		try {
+			fs.writeFileSync(dir + filename, content);
+			console.log('File written successfully!');
+		  } catch (error) {
+			console.error('Error writing file:', error.message);
+			return error.message; // Return the exact error message
+		  }
 	};
 
 	it( "exports all inclusive language assessments to a csv", () => {
