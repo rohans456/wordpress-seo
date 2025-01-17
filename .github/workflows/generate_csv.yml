@@ -16,11 +16,6 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y build-essential python3
-
-      # Install dependencies
-      - name: Install dependencies
-        working-directory: packages/yoastseo
-        run: yarn install --ignore-scripts
         
        # Check directory permissions
       - name: Check directory permissions
