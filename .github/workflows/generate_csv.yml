@@ -18,7 +18,7 @@ jobs:
         
        # Check directory permissions
       - name: Check directory permissions
-        run: ls -ld /home/runner/work/wordpress-seo/wordpress-seo
+        run: ls -l /home/runner/work/wordpress-seo/wordpress-seo
 
       # Check node version
       - name: Check node version
