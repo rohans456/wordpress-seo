@@ -31,7 +31,7 @@ describe( "Export of the inclusive language configuration", () => {
 	const writeToTempFile = ( filename, content ) => {
 		// Creates a temporary directory in the current working directory to store the data, if it not yet exists.
 		// (i.e., packages/yoastseo/tmp/ if this function is called from packages/yoastseo/)
-		const dir = "testingfolder/";
+		const dir = "testingfolder1/";
 		try {
 			if (!fs.existsSync(dir)) {
 			  fs.mkdirSync(dir);
