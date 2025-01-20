@@ -20,6 +20,10 @@ jobs:
       - name: Check directory permissions
         run: ls -ld packages/yoastseo 
 
+      # Check node version
+      - name: Check node version
+        run: node -v 
+
       # Run tests with debug logs
       - name: Run tests
         working-directory: packages/yoastseo
