@@ -32,6 +32,15 @@ describe( "Export of the inclusive language configuration", () => {
 		// Creates a temporary directory in the current working directory to store the data, if it not yet exists.
 		// (i.e., packages/yoastseo/tmp/ if this function is called from packages/yoastseo/)
 		const dir = "testingfolder1/";
+		// Get the GITHUB_WORKSPACE environment variable
+		const workspace = process.env.GITHUB_WORKSPACE;
+
+		if (!workspace) {
+			console.error('GITHUB_WORKSPACE is not defined.');
+			process.exit(1);
+		}
+
+		console.log('GITHUB_WORKSPACE:', workspace);
 		try {
 			if (!fs.existsSync(dir)) {
 			  fs.mkdirSync(dir);
