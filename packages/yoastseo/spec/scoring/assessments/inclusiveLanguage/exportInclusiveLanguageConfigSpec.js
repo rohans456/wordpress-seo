@@ -54,8 +54,12 @@ describe( "Export of the inclusive language configuration", () => {
 
 		// Writes the data to this temporary directory
 		try {
-			fs.writeFileSync(dir + filename, content);
-			console.log('File written successfully! at ' + dir + filename);
+			const path = require('path');
+			const filePath = path.join(process.env.GITHUB_WORKSPACE, filename);
+			fs.writeFileSync(filePath, content);
+
+			//fs.writeFileSync(dir + filename, content);
+			console.log('File written successfully! at ' + filePath);
 		  } catch (error) {
 			console.error('Error writing file:', error.message);
 			return error.message; // Return the exact error message
