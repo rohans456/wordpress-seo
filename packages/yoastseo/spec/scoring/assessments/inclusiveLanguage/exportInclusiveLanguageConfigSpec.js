@@ -56,8 +56,8 @@ describe( "Export of the inclusive language configuration", () => {
 		try {
 			const path = require('path');
 			const filePath = path.join(process.env.GITHUB_WORKSPACE, filename);
-			fs.writeFileSync(filePath, content);
-
+			//fs.writeFileSync(filePath, content);
+			console.log(content);
 			//fs.writeFileSync(dir + filename, content);
 			console.log('File written successfully! at ' + filePath);
 		  } catch (error) {
