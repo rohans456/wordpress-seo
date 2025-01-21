@@ -31,39 +31,13 @@ describe( "Export of the inclusive language configuration", () => {
 	const writeToTempFile = ( filename, content ) => {
 		// Creates a temporary directory in the current working directory to store the data, if it not yet exists.
 		// (i.e., packages/yoastseo/tmp/ if this function is called from packages/yoastseo/)
-		const dir = "testingfolder1/";
-		// Get the GITHUB_WORKSPACE environment variable
-		const workspace = process.env.GITHUB_WORKSPACE;
-
-		if (!workspace) {
-			console.error('GITHUB_WORKSPACE is not defined.');
-			process.exit(1);
+		const dir = "tmp/";
+		if ( ! fs.existsSync( dir ) ) {
+			fs.mkdirSync( dir );
 		}
 
-		console.log('GITHUB_WORKSPACE:', workspace);
-		try {
-			if (!fs.existsSync(dir)) {
-			  fs.mkdirSync(dir);
-			  console.log(`Directory '${dir}' created successfully.`);
-			} else {
-			  console.log(`Directory '${dir}' already exists.`);
-			}
-		  } catch (error) {
-			console.error(`Error handling directory '${dir}':`, error.message);
-		  }
-
 		// Writes the data to this temporary directory
-		try {
-			const path = require('path');
-			const filePath = path.join(process.env.GITHUB_WORKSPACE, filename);
-			//fs.writeFileSync(filePath, content);
-			console.log(content);
-			//fs.writeFileSync(dir + filename, content);
-			console.log('File written successfully! at ' + filePath);
-		  } catch (error) {
-			console.error('Error writing file:', error.message);
-			return error.message; // Return the exact error message
-		  }
+		fs.writeFileSync( dir + filename, content );
 	};
 
 	it( "exports all inclusive language assessments to a csv", () => {
@@ -108,6 +82,7 @@ describe( "Export of the inclusive language configuration", () => {
 		const doExport = true;
 		if ( doExport ) {
 			writeToTempFile( "inclusive-language-database.csv", resultLines.join( "\n" ) );
+			console.log("result=== \n"+resultLines.join( "\n" ));
 		}
 	} );
 
