@@ -27,4 +27,4 @@ jobs:
       # Run tests with debug logs
       - name: Run tests
         working-directory: packages/yoastseo
-        run: yarn export:inclusive-language
+        run: yarn export:inclusive-language --collectCoverage=false
