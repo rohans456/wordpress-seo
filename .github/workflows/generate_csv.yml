@@ -15,16 +15,8 @@ jobs:
       - name: Install dependencies
         working-directory: packages/yoastseo
         run: yarn install --ignore-scripts
-        
-       # Check directory permissions
-      - name: Check directory permissions
-        run: ls -l /home/runner/work/wordpress-seo/wordpress-seo
 
-      # Check node version
-      - name: Check node version
-        run: node -v 
-
-      # Run tests with debug logs
+      # Run tests
       - name: Run tests
         working-directory: packages/yoastseo
         run: yarn export:inclusive-language --collectCoverage=false
