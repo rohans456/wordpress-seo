@@ -15,10 +15,10 @@ jobs:
           LABELS="${{ join(github.event.pull_request.labels.*.name, ' ') }}"
           if [[ "$LABELS" != *"changelog:"* ]]; then
             echo "❌ Missing required changelog label!"
-            echo "status=failed" >> $GITHUB_ENV
+            echo "status=failed" >> "$GITHUB_ENV"
           else
             echo "✅ Changelog label found."
-            echo "status=success" >> $GITHUB_ENV
+            echo "status=success" >> "$GITHUB_ENV"
           fi
 
       - name: Check for milestone
@@ -26,10 +26,10 @@ jobs:
         run: |
           if [[ -z "${{ github.event.pull_request.milestone }}" ]]; then
             echo "❌ Missing milestone!"
-            echo "status=failed" >> $GITHUB_ENV
+            echo "status=failed" >> "$GITHUB_ENV"
           else
             echo "✅ Milestone assigned."
-            echo "status=success" >> $GITHUB_ENV
+            echo "status=success" >> "$GITHUB_ENV"
           fi
 
       - name: Final Validation
@@ -39,4 +39,4 @@ jobs:
             exit 1
           fi
         env:
-          status: ${{ env.status }}
+          status: "${{ env.status }}"
