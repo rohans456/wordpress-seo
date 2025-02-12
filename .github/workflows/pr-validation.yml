@@ -15,10 +15,10 @@ jobs:
           LABELS="${{ join(github.event.pull_request.labels.*.name, ' ') }}"
           if [[ "$LABELS" != *"changelog:"* ]]; then
             echo "❌ Missing required changelog label!"
-            echo "status=failed" >> "$GITHUB_ENV"
+            echo "changelog_status=failed" >> "$GITHUB_ENV"
           else
             echo "✅ Changelog label found."
-            echo "status=success" >> "$GITHUB_ENV"
+            echo "changelog_status=success" >> "$GITHUB_ENV"
           fi
 
       - name: Check for milestone
@@ -26,17 +26,18 @@ jobs:
         run: |
           if [[ -z "${{ github.event.pull_request.milestone }}" ]]; then
             echo "❌ Missing milestone!"
-            echo "status=failed" >> "$GITHUB_ENV"
+            echo "milestone_status=failed" >> "$GITHUB_ENV"
           else
             echo "✅ Milestone assigned."
-            echo "status=success" >> "$GITHUB_ENV"
+            echo "milestone_status=success" >> "$GITHUB_ENV"
           fi
 
       - name: Final Validation
         run: |
-          if [[ "$status" == "failed" ]]; then
+          if [[ "$changelog_status" == "failed" || "$milestone_status" == "failed" ]]; then
             echo "❌ PR is missing required attributes. Please add a milestone and a changelog label before merging."
             exit 1
+          else
+            echo "✅ PR validation passed."
           fi
-        env:
-          status: "${{ env.status }}"
+ 
